@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
 public class Empresa {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SQ_TB_EMPRESA")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="Seq_Empresa")
 	@Column(name="CD_EMPRESA")
 	private int codigo;
 	
