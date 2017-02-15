@@ -12,31 +12,30 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-//import javax.persistence.*;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name="TB_FUNCIONARIO")
-@SequenceGenerator(name="seqFunc",sequenceName="SQ_TB_FUNCIONARIO",allocationSize=1)//cria uma sequence no banco oracle
+@SequenceGenerator(name="seqFunc",sequenceName="SQ_TB_FUNCIONARIO",allocationSize=1)
 public class Funcionario {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqFunc")//utiliza a sequence
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqFunc")
 	@Column(name="CD_FUNCIONARIO")
 	private int codigo;
 	
 	@Column(name="NM_FUNCIONARIO",nullable=false,length=150)
 	private String nome;
 	
+	@Temporal(TemporalType.DATE) //armazena somente a data
 	@Column(name="DT_NASCIMENTO")
-	@Temporal(TemporalType.DATE)
 	private Calendar dataNascimento;
 	
 	@Column(name="DT_ADMISSAO",nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Calendar dataAdmissao;
 	
-	@Transient//não será mapeado como coluna na tabela
+	@Transient //Não será mapeada para uma coluna no BD
 	private int chaveAcesso;
 	
 	@Lob
@@ -45,6 +44,10 @@ public class Funcionario {
 	
 	@Column(name="DS_SEXO")
 	private Sexo sexo;
+	
+	public Funcionario() {
+		super();
+	}
 
 	public Funcionario(int codigo, String nome, Calendar dataNascimento, Calendar dataAdmissao, int chaveAcesso,
 			byte[] foto, Sexo sexo) {

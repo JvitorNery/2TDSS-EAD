@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -14,52 +15,56 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="TB_EMPRESA")
-@SequenceGenerator(name="Seq_Empresa",sequenceName="SQ_TB_EMPRESA",allocationSize=1)
+@SequenceGenerator(name="seqEmpresa",sequenceName="SQ_TB_EMPRESA",allocationSize=1)
 public class Empresa {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="Seq_Empresa")
 	@Column(name="CD_EMPRESA")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="seqEmpresa")
 	private int codigo;
 	
-	@Column(name="NM_EMPRESA",length=150)
+	@Column(name="NM_EMPRESA", nullable=false, length=100)
 	private String nome;
 	
-	@Column(name="NR_CNPJ",length=16)
-	private int cnpj;
+	@Column(name="NR_CNPJ",nullable=false, length=16)
+	private String cnpj;
 	
 	@Column(name="DT_FUNDACAO")
 	@Temporal(TemporalType.DATE)
-	private Calendar fundacao;
+	private Calendar dataFundacao;
 	
 	@Column(name="DS_ENDERECO")
 	private String endereco;
 	
 	@Column(name="VL_FATURAMENTO")
-	private double faturamento;
+	private Double faturamento;
 	
+	@Lob
 	@Column(name="FL_LOGO")
 	private byte[] logo;
 	
-	@Column(name="NR_TELEFONE",length=9)
+	@Column(name="NR_TELEFONE")
 	private String telefone;
 	
-	@Column(name="DS_status")
+	@Column(name="DS_STATUS")
 	private Status status;
 
-
-	public Empresa(int codigo, String nome, int cnpj, Calendar fundacao, String endereco, double faturamento,
+	public Empresa(int codigo, String nome, String cnpj, Calendar dataFundacao, String endereco, Double faturamento,
 			byte[] logo, String telefone, Status status) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.cnpj = cnpj;
-		this.fundacao = fundacao;
+		this.dataFundacao = dataFundacao;
 		this.endereco = endereco;
 		this.faturamento = faturamento;
 		this.logo = logo;
 		this.telefone = telefone;
 		this.status = status;
+	}
+
+	public Empresa() {
+		super();
 	}
 
 	public int getCodigo() {
@@ -78,20 +83,20 @@ public class Empresa {
 		this.nome = nome;
 	}
 
-	public int getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(int cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 
-	public Calendar getFundacao() {
-		return fundacao;
+	public Calendar getDataFundacao() {
+		return dataFundacao;
 	}
 
-	public void setFundacao(Calendar fundacao) {
-		this.fundacao = fundacao;
+	public void setDataFundacao(Calendar dataFundacao) {
+		this.dataFundacao = dataFundacao;
 	}
 
 	public String getEndereco() {
@@ -102,11 +107,11 @@ public class Empresa {
 		this.endereco = endereco;
 	}
 
-	public double getFaturamento() {
+	public Double getFaturamento() {
 		return faturamento;
 	}
 
-	public void setFaturamento(double faturamento) {
+	public void setFaturamento(Double faturamento) {
 		this.faturamento = faturamento;
 	}
 
@@ -133,4 +138,5 @@ public class Empresa {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-}
+	
+}	
