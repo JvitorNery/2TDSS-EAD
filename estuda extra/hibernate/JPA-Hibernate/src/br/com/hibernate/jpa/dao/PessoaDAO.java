@@ -17,13 +17,14 @@ public class PessoaDAO {
 	    EntityManager entityManager = null;
 	    try {
 	      //Obtém o factory a partir da unidade de persistência.
-	      factory = Persistence.createEntityManagerFactory
-	        ("ExemplosJPAPU");
+	      factory = Persistence.createEntityManagerFactory("CLIENTE_ORACLE");
 	      //Cria um entity manager.
 	      entityManager = factory.createEntityManager();
 	      //Fecha o factory para liberar os recursos utilizado.
+	      //factory.close();
+	      
 	    } finally {
-	      factory.close();
+	    	
 	    }
 	    return entityManager;
 	  }
@@ -38,6 +39,7 @@ public class PessoaDAO {
 		
 		EntityManager entityManager = getEntityManager();
 		
+
 		try{
 			// Inicia uma transação com o banco de dados.
 			
@@ -56,7 +58,7 @@ public class PessoaDAO {
 			// Finaliza a transação.
 			
 			entityManager.getTransaction().commit();
-			
+			//entityManager.close();
 		} finally{
 			entityManager.close();
 		}
@@ -106,9 +108,10 @@ public class PessoaDAO {
 		Pessoa pessoa = null;
 		
 		try{
-			pessoa = entityManager.find(pessoa.getClass(), id);
-		} finally {
+			pessoa = entityManager.find(Pessoa.class, id);
 			entityManager.close();
+		} finally {
+			
 		}
 		return pessoa;
 	}

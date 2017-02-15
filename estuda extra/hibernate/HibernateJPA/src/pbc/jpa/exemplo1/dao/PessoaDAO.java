@@ -15,20 +15,18 @@ public class PessoaDAO {
    * @return
    */
   private EntityManager getEntityManager() {
-    EntityManagerFactory factory = null;
-    EntityManager entityManager = null;
+    EntityManagerFactory factory = Persistence.createEntityManagerFactory("CLIENTE_ORACLE");
+    EntityManager entityManager = factory.createEntityManager();
     try {
       //Obtém o factory a partir da unidade de persistência.
-      factory = Persistence.createEntityManagerFactory("ExemplosJPAPU");
+      //factory = Persistence.createEntityManagerFactory("CLIENTE_ORACLE");
       
       //Cria um entity manager.
-      entityManager = factory.createEntityManager();
+      //entityManager = factory.createEntityManager();
       //Fecha o factory para liberar os recursos utilizado.
       
     } finally {
-    	if(factory.isOpen()){
-      		factory.close();
-      	}
+    	factory.close();
     }
     return entityManager;
   }
@@ -44,6 +42,7 @@ public class PessoaDAO {
     EntityManager entityManager = getEntityManager();
     try {
       // Inicia uma transação com o banco de dados.
+    	
       entityManager.getTransaction().begin();
       System.out.println("Salvando a pessoa.");
       /* Verifica se a pessoa ainda não está salva 

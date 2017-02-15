@@ -25,10 +25,10 @@ public class Pessoa implements Serializable{
 	private String nome;
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DT_NASC", nullable = false)
+	@Column(name = "DATANASC", nullable = false)
 	private Calendar nascimeno;
 	
-	@Column(name="ds_email",nullable = false)
+	@Column(name="EMAIL",nullable = false)
 	private String email;
 
 	public Pessoa(long id, String nome, Calendar nascimeno, String email) {
@@ -38,7 +38,7 @@ public class Pessoa implements Serializable{
 		this.nascimeno = nascimeno;
 		this.email = email;
 	}
-
+	public Pessoa() {}
 	public long getId() {
 		return id;
 	}

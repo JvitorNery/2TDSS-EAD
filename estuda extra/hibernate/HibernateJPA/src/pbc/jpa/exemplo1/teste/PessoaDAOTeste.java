@@ -24,11 +24,11 @@ public class PessoaDAOTeste {
     System.out.println("Salvando a pessoa: "
       + pessoa.getNome());
     pessoa = dao.salvar(pessoa);
-
+/*
     pessoa.setNome("Rafael Guimarães Sakurai");
     pessoa = dao.salvar(pessoa);
     System.out.println("Alterando a pessoa: "
-      + pessoa.getNome());
+      + pessoa.getNome());*/
 
     Pessoa pessoa2 = dao.consultarPorId(pessoa.getId());
     System.out.println("Consultando: " + pessoa2.getNome());
